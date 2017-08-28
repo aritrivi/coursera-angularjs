@@ -22,7 +22,7 @@ console.log($scope.lunchList);
     var x = 0;
 
     for (x = 0; x < items.length; x++) {
-      if (items[x] != " ") {
+      if (items[x] != " " && items[x] != "") {
         count += 1;
       }
     }
