@@ -4,39 +4,33 @@
 angular.module('ShoppingListCheckOff', [])
 .controller('ToBuyController', ToBuyController)
 .controller('AlreadyBoughtController', AlreadyBoughtController)
-.factory('ShoppingListFactory', ShoppingListFactory);
+.service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
 // To Buy List - controller
-ToBuyController.$inject = ['ShoppingListFactory'];
-function ToBuyController(ShoppingListFactory) {
+ToBuyController.$inject = ['ShoppingListCheckOffService'];
+function ToBuyController(ShoppingListCheckOffService) {
   var list1 = this;
-
-  // Use factory to create new shopping list service
-  var shoppingList = ShoppingListFactory();
 
   list1.name = "";
   list1.quantity = "";
 
-  list1.items = shoppingList.getItems();
+  list1.items = ShoppingListCheckOffService.getItems();
 
   list1.buyItem = function (itemIndex) {
-    shoppingList.buyItem(itemIndex);
+    ShoppingListCheckOffService.buyItem(itemIndex);
   };
 }
 
 
 // Already bought list - controller
-AlreadyBoughtController.$inject = ['ShoppingListFactory'];
-function AlreadyBoughtController(ShoppingListFactory) {
+AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+function AlreadyBoughtController(ShoppingListCheckOffService) {
   var list2 = this;
-
-  // Use factory to create new shopping list service
-  var shoppingList = ShoppingListFactory(3);
 
   list2.name = "";
   list2.quantity = "";
 
-  list2.items = shoppingList.getPurchasedItems();
+  list2.items = ShoppingListCheckOffService.getPurchasedItems();
 
   // list2.removeItem = function (itemIndex) {
   //   shoppingList.removeItem(itemIndex);
@@ -75,15 +69,6 @@ function ShoppingListCheckOffService() {
   service.getPurchasedItems = function () {
     return bought_items;
   };
-}
-
-
-function ShoppingListFactory() {
-  var factory = function (maxItems) {
-    return new ShoppingListCheckOffService();
-  };
-
-  return factory;
 }
 
 })();
