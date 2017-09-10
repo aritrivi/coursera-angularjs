@@ -1,0 +1,8 @@
+<h3>Here is what we found:</h3>
+<ol>
+  <li ng-repeat="item in menu.found">
+    <strong>{{ item.name }}</strong> - {{ item.description }}
+    <button ng-click="list.onRemove({index: $index});">Don't want this one!</button>
+  </li>
+</ol>
+<div class="error" ng-transclude></div>
